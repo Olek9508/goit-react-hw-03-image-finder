@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { ToastContainer } from "react-toastify";
 import { SearchBar } from "components/Searchbar/Searchbar";
 
 export class App extends Component  {
@@ -15,12 +14,17 @@ export class App extends Component  {
     return (
        <div>
         <SearchBar onSubmit={this.onSubmitForm} />
-        <ToastContainer autoClose={3000} />
     </div>
  
   );}
 
 };
+
+// import { ToastContainer } from "react-toastify";
+
+
+
+        // {/* <ToastContainer autoClose={3000} /> */}
 
 
       // style={{

@@ -1,27 +1,27 @@
 import { Component } from "react"
-  import { toast } from 'react-toastify';
+//   import { toast } from 'react-toastify';
 
 export class SearchBar extends Component {
     state = {
-    itemName: '',
+    searchQuery: '',
     }
     
     onNameChange =(event) =>{
-        this.setState({ itemName: event.currentTarget.value.toLowerCase() })
+        this.setState({ searchQuery: event.currentTarget.value.toLowerCase() })
     }
 
     onFormSubmit = (event) => {
         event.preventDefault()
-        if (this.state.itemName.trim() === "") {
-            toast.warn("Field is empty, please write smth");
+        if (this.state.searchQuery.trim() === "") {
+            alert("Field is empty, please write smth");
             return;
         }
-        this.props.onSubmit(this.state.itemName)
-        this.setState({ itemName: "" })
+        this.props.onSubmit(this.state.searchQuery)
+        this.setState({ searchQuery: "" })
     }
 
     render() {
-    const { itemName } = this.state;
+    const { searchQuery } = this.state;
         return (
 <header className="searchbar">
     <form className="form" onSubmit={this.onFormSubmit}>
@@ -36,7 +36,7 @@ export class SearchBar extends Component {
       autoFocus
       placeholder="Search images and photos"
       onChange={this.onNameChange}
-      value= {itemName}
+      value= {searchQuery}
     />
   </form>
 </header>
