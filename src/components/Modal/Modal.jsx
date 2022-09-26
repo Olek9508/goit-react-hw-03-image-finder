@@ -9,15 +9,15 @@ export class Modal extends Component{
         window.removeEventListener("keydown",this.onKeyDown)
     }
 
-    onKeyDown(event) {
-        if (event.code === "Escape") {
-                this.props.onBackdrop()
-            }
+  onKeyDown = (event) => {
+    if (event.code === "Escape") {
+      this.props.onBackdrop();
     }
+  };
 
     onBackdropClick(event) {
         if (event.target === event.currentTarget) {
-            this.props.onBackdrop()
+            this.props.onBackdrop();
         }
     }
 
