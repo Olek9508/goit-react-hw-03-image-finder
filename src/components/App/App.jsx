@@ -1,24 +1,114 @@
 import { Component } from "react";
 import { SearchBar } from "components/Searchbar/Searchbar";
+import { ImageGallery } from "components/ImageGallery/ImageGallery";
+import { Button } from "components/Button/Button";
+import { Modal } from "components/Modal/Modal";
+import { fetchItems } from "api/Api";
 
 export class App extends Component  {
   state = {
-    itemName: "",
+    contentModal:"",
+    searchQuery: "",
+    page: 1,
+    imagesVisible:[],
+    isLoading: false,
+    openModal: false,
   }
 
-  onSubmitForm = (itemName) => {
-    this.setState({ itemName });
-}
+  componentDidUpdate(prevProps, { searchQuery, page }) {
+    if (searchQuery !== this.state.searchQuery || page !== this.state.page) {
+      this.dataGet();
+    }
+    this.onScroll();
+  }
+  
+   toggleModal = () => {
+    this.setState(({ openModal }) => ({ openModal: !openModal }));
+  };
+
+  toggleLoading = () => {
+    this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
+  };
+
+  hadleChangeQuery = (query) => {
+    this.setState({
+      searchQuery: query,
+      page: 1,
+      imagesVisible: [],
+    });
+  };
+
+  handleNextPage = () => {
+    this.setState(({ page }) => {
+      return {
+        page: page + 1,
+      };
+    });
+  };
+
+  onScroll = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+  modalContentSet = (itemId) => {
+    const { imagesVisible } = this.state;
+    const element = imagesVisible.find(({ id }) => id === itemId);
+    this.setState({ contentModal: element.largeImageURL });
+  };
+
+dataGet = () => {
+    const { searchQuery, page } = this.state;
+    this.toggleLoading();
+    fetchItems(searchQuery, page)
+      .then(({ hits }) => {
+        this.setState(({ imagesVisible }) => {
+          return { imagesVisible: [...imagesVisible, ...hits] };
+        });
+      })
+      .catch((error) => console.log(error.message))
+      .finally(this.toggleLoading);
+  };
 
   render() {
+    const { imagesVisible, openModal, contentModal, isLoading, page } = this.state;
+    const isNotLastPage = imagesVisible.length / page === 12;
+    const buttonEnable = imagesVisible.length > 0 && !isLoading && isNotLastPage;
     return (
-       <div>
-        <SearchBar onSubmit={this.onSubmitForm} />
-    </div>
- 
-  );}
+      <div className="App">
+        <SearchBar onSubmit={this.hadleChangeQuery} />
+        {imagesVisible.length === 0 ? (
+          <h2>Write down your request</h2>
+        ) : (
+          <>
+            <ImageGallery
+              images={imagesVisible}
+              onClick={this.toggleModal}
+              onClickItem={this.modalContentSet}
+            />
+
+            {openModal && (
+              <Modal content={contentModal} onBackdrop={this.toggleModal} />
+            )}
+            {/* {isLoading && <Spinner />} */}
+
+            {buttonEnable && (
+              <Button name="Load more" onPress={this.handleNextPage} />
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
 };
+
+
+//   onSubmitForm = (itemName) => {
+//     this.setState({ itemName });
+// }
 
 // import { ToastContainer } from "react-toastify";
 

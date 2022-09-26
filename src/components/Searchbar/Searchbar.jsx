@@ -1,12 +1,11 @@
 import { Component } from "react"
-//   import { toast } from 'react-toastify';
 
 export class SearchBar extends Component {
     state = {
     searchQuery: '',
     }
     
-    onNameChange =(event) =>{
+    onChange =(event) =>{
         this.setState({ searchQuery: event.currentTarget.value.toLowerCase() })
     }
 
@@ -35,7 +34,7 @@ export class SearchBar extends Component {
       autoComplete="off"
       autoFocus
       placeholder="Search images and photos"
-      onChange={this.onNameChange}
+      onChange={this.onChange}
       value= {searchQuery}
     />
   </form>

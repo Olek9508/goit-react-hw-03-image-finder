@@ -15,18 +15,18 @@ export class Modal extends Component{
             }
     }
 
-    onClickBackdrop(event) {
+    onBackdropClick(event) {
         if (event.target === event.currentTarget) {
             this.props.onBackdrop()
         }
     }
 
     render() {
-    const { smallImage } = this.props;
+    const { content } = this.props;
         return (
-    <div onClick={this.handleBackdropClick}>
+    <div onClick={this.onBackdropClick}>
         <div>
-          <img src={smallImage} alt="" />
+          <img src={content} alt="" />
         </div>
     </div>
         )
