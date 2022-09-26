@@ -3,6 +3,7 @@ import { SearchBar } from "components/Searchbar/Searchbar";
 import { ImageGallery } from "components/ImageGallery/ImageGallery";
 import { Button } from "components/Button/Button";
 import { Modal } from "components/Modal/Modal";
+import { Loader } from "components/Loader/Loader";
 import { fetchItems } from "api/Api";
 
 export class App extends Component  {
@@ -92,7 +93,7 @@ dataGet = () => {
             {openModal && (
               <Modal content={contentModal} onBackdrop={this.toggleModal} />
             )}
-            {/* {isLoading && <Spinner />} */}
+            {isLoading && <Loader />}
 
             {buttonEnable && (
               <Button name="Load more" onPress={this.handleNextPage} />
