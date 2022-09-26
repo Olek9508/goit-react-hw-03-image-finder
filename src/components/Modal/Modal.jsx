@@ -1,6 +1,12 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 export class Modal extends Component{
+  static propTypes = {
+    onBackdrop: PropTypes.func.isRequired,
+    content: PropTypes.string.isRequired,
+  };
+
     componentDidMount() { 
         window.addEventListener("keydown",this.onKeyDown)
     }

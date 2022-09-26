@@ -1,9 +1,15 @@
 import { Component } from "react"
+import PropTypes from "prop-types";
+
 
 export class SearchBar extends Component {
     state = {
     searchQuery: '',
     }
+
+    static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
     
     onChange =(event) =>{
         this.setState({ searchQuery: event.currentTarget.value.toLowerCase() })
@@ -22,9 +28,9 @@ export class SearchBar extends Component {
     render() {
     const { searchQuery } = this.state;
         return (
-<header className="searchbar">
-    <form className="form" onSubmit={this.onFormSubmit}>
-    <button type="submit" className="button">
+<header>
+    <form  onSubmit={this.onFormSubmit}>
+    <button type="submit">
     <span className="button-label">Search</span>
     </button>
 
