@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { ImageGalleryItem } from "./ImageGalleryItem/ImageGalleryItem";
+import { GalleryListContainer, ItemContainer } from "./ImageGallery.styled";
 import PropTypes from "prop-types";
 
 
@@ -23,14 +24,14 @@ export class ImageGallery extends Component {
     render() {
         const {images,onClickItem} = this.props
         return (
-    <ul onClick={this.onOpenModal}>
+    <GalleryListContainer onClick={this.onOpenModal}>
         {images &&
           images.map((image) => (
-            <li key={image.id}>
+            <ItemContainer key={image.id}>
               <ImageGalleryItem {...image} onClickItem={onClickItem} />
-            </li>
+            </ItemContainer>
           ))}
-    </ul>
+    </GalleryListContainer>
         )
     }
 }

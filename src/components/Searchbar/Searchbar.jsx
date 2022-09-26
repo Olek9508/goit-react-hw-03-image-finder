@@ -1,5 +1,8 @@
 import { Component } from "react"
 import PropTypes from "prop-types";
+import { SearchBarStyled, SearchForm, SubmitBtn, SearchInput, SearchFormButtonLabel } from "./SearchBar.styled";
+import { FaSearch } from "react-icons/fa"
+
 
 
 export class SearchBar extends Component {
@@ -18,7 +21,6 @@ export class SearchBar extends Component {
     onFormSubmit = (event) => {
         event.preventDefault()
         if (this.state.searchQuery.trim() === "") {
-            alert("Field is empty, please write smth");
             return;
         }
         this.props.onSubmit(this.state.searchQuery)
@@ -28,23 +30,23 @@ export class SearchBar extends Component {
     render() {
     const { searchQuery } = this.state;
         return (
-<header>
-    <form  onSubmit={this.onFormSubmit}>
-    <button type="submit">
-    <span className="button-label">Search</span>
-    </button>
+          <SearchBarStyled>
+    <SearchForm  onSubmit={this.onFormSubmit}>
+    <SubmitBtn type="submit"> <FaSearch/>
+    <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+    </SubmitBtn>
 
-    <input
+    <SearchInput
       className="input"
       type="text"
       autoComplete="off"
       autoFocus
-      placeholder="Search images and photos"
+      placeholder="Search images and photos..."
       onChange={this.onChange}
       value= {searchQuery}
     />
-  </form>
-</header>
+              </SearchForm>
+</SearchBarStyled>
         )
     }
 }

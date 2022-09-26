@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { ImageContainer } from "./ImageGalleryItem.styled";
 import PropTypes from "prop-types";
 
 
@@ -16,7 +17,7 @@ export class ImageGalleryItem extends Component {
     render() {
         const { id, webformatURL  } = this.props;
         return (
-          <img src={webformatURL } alt="" onClick={()=>this.contentForModal(id)}/>
+          <ImageContainer src={webformatURL } alt="" onClick={()=>this.contentForModal(id)}/>
         )
     }
 }

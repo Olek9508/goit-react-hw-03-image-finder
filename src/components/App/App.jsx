@@ -4,6 +4,7 @@ import { ImageGallery } from "components/ImageGallery/ImageGallery";
 import { Button } from "components/Button/Button";
 import { Modal } from "components/Modal/Modal";
 import { Loader } from "components/Loader/Loader";
+import { Container } from "./App.styled";
 import { fetchItems } from "api/Api";
 
 export class App extends Component  {
@@ -78,7 +79,7 @@ dataGet = () => {
     const isNotLastPage = imagesVisible.length / page === 12;
     const buttonEnable = imagesVisible.length > 0 && !isLoading && isNotLastPage;
     return (
-      <div className="App">
+      <Container>
         <SearchBar onSubmit={this.hadleChangeQuery} />
         {imagesVisible.length === 0 ? (
           <h2>Write down your request</h2>
@@ -97,10 +98,10 @@ dataGet = () => {
 
             {buttonEnable && (
               <Button name="Load more" onPress={this.handleNextPage} />
-            )}
+              )}
           </>
         )}
-      </div>
+      </Container>
     );
   }
 
