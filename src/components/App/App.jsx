@@ -97,9 +97,7 @@ dataGet = () => {
     return (
       <Container>
         <SearchBar onSubmit={this.hadleChangeQuery} />
-        {imagesVisible.length === 0? (
-          <h2>Write down your request</h2>
-        ) : (
+        {imagesVisible.length !== 0&&
           <>
             <ImageGallery
               images={imagesVisible}
@@ -115,7 +113,7 @@ dataGet = () => {
               <Button name="Load more" onPress={this.handleNextPage} />
               )}
           </>
-        )}
+        }
       </Container>
     );
   }
