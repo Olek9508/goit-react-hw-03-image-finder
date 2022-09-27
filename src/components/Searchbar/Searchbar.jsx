@@ -29,7 +29,7 @@ export class SearchBar extends Component {
     }
 
     render() {
-    const { searchQuery } = this.state;
+      const { searchQuery } = this.state;
         return (
     <SearchBarStyled>
     <SearchForm  onSubmit={this.onFormSubmit}>
