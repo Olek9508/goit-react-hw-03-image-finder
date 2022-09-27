@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Notify } from "notiflix";
 import { SearchBar } from "components/Searchbar/Searchbar";
 import { ImageGallery } from "components/ImageGallery/ImageGallery";
 import { Button } from "components/Button/Button";
@@ -34,15 +35,20 @@ export class App extends Component  {
 
 
  
-  hadleChangeQuery = (query) => {
-    if (this.state.query !== query) {
+  hadleChangeQuery = ( query ) => {
+    if (this.state.searchQuery !== query) {
       this.setState({
-      searchQuery: query,
-      page: 1,
-      // imagesVisible: [],
-    });
+        searchQuery: query,
+        page: 1,
+        imagesVisible: [],
+      });
     }
-  };
+    else {
+      this.setState({
+        searchQuery: query,
+      });
+    };
+  }
 
   handleNextPage = () => {
     this.setState(({ page }) => {
@@ -70,7 +76,13 @@ dataGet = () => {
     this.toggleLoading();
     fetchItems(searchQuery, page)
       .then(({ hits }) => {
+      if (hits.length === 0) {
+      return Notify.failure(
+      `There is no matches for ${searchQuery}, and 0 pages. Try to write down the another one request `
+      );          
+        }
         this.setState(({ imagesVisible }) => {
+          // Notify.success(`Congradulations! Here are results, that we found for your "${searchQuery}" request`)
           return { imagesVisible: [...imagesVisible, ...hits] };
         });
       })

@@ -1,4 +1,5 @@
 import { Component } from "react"
+import { Notify } from "notiflix";
 import PropTypes from "prop-types";
 import { SearchBarStyled, SearchForm, SubmitBtn, SearchInput, SearchFormButtonLabel } from "./SearchBar.styled";
 import { FaSearch } from "react-icons/fa"
@@ -21,8 +22,7 @@ export class SearchBar extends Component {
     onFormSubmit = (event) => {
         event.preventDefault()
       if (this.state.searchQuery.trim() === "") {
-          alert("Please write anything in the field, to start the searching")
-            return;
+        return  Notify.warning("Please fill out the search field with the request, to start the searching")
       }
         this.props.onSubmit(this.state.searchQuery)
         // this.setState({ searchQuery: "" })
