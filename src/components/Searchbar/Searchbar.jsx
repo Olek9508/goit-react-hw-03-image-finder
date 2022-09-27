@@ -20,7 +20,8 @@ export class SearchBar extends Component {
 
     onFormSubmit = (event) => {
         event.preventDefault()
-        if (this.state.searchQuery.trim() === "") {
+      if (this.state.searchQuery.trim() === "") {
+          alert("Please write anything in the field, to start the searching")
             return;
         }
         this.props.onSubmit(this.state.searchQuery)
