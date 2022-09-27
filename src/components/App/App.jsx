@@ -81,7 +81,7 @@ dataGet = () => {
     return (
       <Container>
         <SearchBar onSubmit={this.hadleChangeQuery} />
-        {imagesVisible.length === 0 ? (
+        {imagesVisible.length === 0? (
           <h2>Write down your request</h2>
         ) : (
           <>
@@ -89,8 +89,7 @@ dataGet = () => {
               images={imagesVisible}
               onClick={this.toggleModal}
               onClickItem={this.modalContentSet}
-            />
-
+              />             
             {openModal && (
               <Modal content={contentModal} onBackdrop={this.toggleModal} />
             )}

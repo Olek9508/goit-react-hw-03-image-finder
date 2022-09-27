@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa"
 
 export class SearchBar extends Component {
     state = {
-    searchQuery: '',
+      searchQuery: '',
     }
 
     static propTypes = {
@@ -23,9 +23,9 @@ export class SearchBar extends Component {
       if (this.state.searchQuery.trim() === "") {
           alert("Please write anything in the field, to start the searching")
             return;
-        }
+      }
         this.props.onSubmit(this.state.searchQuery)
-        this.setState({ searchQuery: "" })
+        // this.setState({ searchQuery: "" })
     }
 
     render() {
