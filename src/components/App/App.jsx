@@ -32,12 +32,16 @@ export class App extends Component  {
     this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
   };
 
+
+ 
   hadleChangeQuery = (query) => {
-    this.setState({
+    if (this.state.query !== query) {
+      this.setState({
       searchQuery: query,
       page: 1,
-      imagesVisible: [],
+      // imagesVisible: [],
     });
+    }
   };
 
   handleNextPage = () => {

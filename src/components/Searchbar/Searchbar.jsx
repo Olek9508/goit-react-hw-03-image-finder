@@ -31,7 +31,7 @@ export class SearchBar extends Component {
     render() {
     const { searchQuery } = this.state;
         return (
-          <SearchBarStyled>
+    <SearchBarStyled>
     <SearchForm  onSubmit={this.onFormSubmit}>
     <SubmitBtn type="submit"> <FaSearch/>
     <SearchFormButtonLabel>Search</SearchFormButtonLabel>
